@@ -1,0 +1,8 @@
+<% if flash[:notice] %>
+      <p class="notice"><%= flash[:notice] %></p>
+<% end %>
+<%= form_for :csv,{:html => {:multipart => true} } do |f| %>
+	<label></label>
+	<%= file_field_tag 'file' %><br />
+	<%= f.submit 'Upload' %>
+<% end %>

@@ -1,0 +1,30 @@
+<%= form_for :mapping, :url => eval(params[:model] + '_csv_import_import_path')  do |f| %>
+<table>
+	<thead>
+		<tr>			
+			<td>Attribute</td>
+			<td>CSV</td>
+		</tr>				
+	</thead>
+	<tbody>
+		<% @attributes.each do |col|%>
+		<tr>
+			<td>				
+				<%= col %>
+			</td>
+			<td>
+				<select name="attributes[<%= col %>]">
+					<option>None</option>
+					<% @heading.each_with_index do |col, index|%>
+					<option value="<%= index %>"><%= col %></option>
+					<% end %>
+				</select>
+			</td>
+			
+		</tr>
+		<% end %>
+		
+	</tbody>
+</table>
+<%= f.submit 'Import' %>
+<% end %>
