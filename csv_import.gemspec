@@ -2,8 +2,8 @@
 # project in your rails apps through git.
 Gem::Specification.new do |s|
   s.name = "csv_import"
-  s.summary = "Insert CsvImport summary."
-  s.description = "Insert CsvImport description."
+  s.summary = "CSV import tool for mapping CSV columnsto database fields."
+  s.description = "Coming soon..."
   s.files = Dir["{app,lib,config}/**/*"] + ["MIT-LICENSE", "Rakefile", "Gemfile", "README.rdoc"]
   s.version = "0.0.1"
 end
