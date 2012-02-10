@@ -32,7 +32,7 @@ class CsvImportController < ::ApplicationController
       reader.each do |row|
         model = eval(params[:model]).new
         params[:attributes].each do |e,i|
-          model[e.to_sym] = row[i.to_i]
+          model[e.to_sym] = row[i.to_i] unless i == "None"
         end
         model.save!
       end
