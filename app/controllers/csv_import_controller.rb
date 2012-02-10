@@ -1,4 +1,7 @@
 class CsvImportController < ::ApplicationController
+  before_filter :authenticate
+  before_filter :access_check
+  
     def upload
       if request.post?
         uploaded = params[:file]
@@ -35,4 +38,11 @@ class CsvImportController < ::ApplicationController
       session[:csv_file] = nil
       redirect_to eval (params[:resource] + '_csv_import_upload_path')
     end
+    
+    private
+
+      def access_check
+        redirect_to :root unless current_user.is_admin?("Data")
+      end
+      
 end
