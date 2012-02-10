@@ -22,6 +22,9 @@ class CsvImportController < ::ApplicationController
       @heading = reader.shift  
       @model = eval(params[:model]).new
       @attributes = @model.attribute_names
+      ["id","created_at","updated_at"].each do |column|
+        @attributes.delete(column)
+      end
     end
 
     def import

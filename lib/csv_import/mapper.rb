@@ -7,8 +7,8 @@ module ActionDispatch::Routing
 
       def csv_import_resource(*resources, &block)
         options = resources.extract_options!
-        options[:model].nil? ? modelname = resource.to_s.classify : modelname = options[:model].capitalize
         resource = resources.pop
+        options[:model].nil? ? modelname = resource.to_s.classify : modelname = options[:model].capitalize
         puts resource.inspect
         yield if block_given?          
         get "#{resource.to_s}/csv_import/upload" =>  'csv_import#upload', :defaults => {:model => modelname, :resource => resource.to_s}
