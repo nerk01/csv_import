@@ -6,9 +6,9 @@ class CsvImportController < ::ApplicationController
       if request.post?
         uploaded = params[:file]
         target = Rails.root.join('tmp', uploaded.original_filename)
-        logger.debug target
+        logger.info uploaded.class.to_s
         File.open(target, 'w') do |file|
-          file.write(uploaded.read)            
+          file.write(File.open(uploaded.tempfile.path,'r',:encoding => "UTF-8").read)            
         end
         session[:csv_file] = target
         
