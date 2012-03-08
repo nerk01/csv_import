@@ -4,6 +4,6 @@ Gem::Specification.new do |s|
   s.name = "csv_import"
   s.summary = "CSV import tool for mapping CSV columnsto database fields."
   s.description = "Coming soon..."
-  s.files = Dir["{app,lib,config}/**/*"] + ["MIT-LICENSE", "Rakefile", "Gemfile", "README.rdoc"]
-  s.version = "0.0.1"
+  s.files = Dir["{app,lib,config}/**/*"] + ["MIT-LICENSE", "Rakefile", "Gemfile", "README.md"]
+  s.version = "0.0.2"
 end

@@ -18,7 +18,7 @@ class CsvImportController < ::ApplicationController
     
     def map
       require 'csv'
-      reader = CSV.open(session[:csv_file], 'r') 
+      reader = CSV.read(session[:csv_file], :encoding => "UTF-8") 
       @heading = reader.shift  
       @model = eval(params[:model]).new
       @attributes = @model.attribute_names
@@ -28,7 +28,7 @@ class CsvImportController < ::ApplicationController
     end
 
     def import
-      reader = CSV.open(session[:csv_file], 'r') 
+      reader = CSV.read(session[:csv_file], :encoding => "UTF-8") 
       reader.each do |row|
         model = eval(params[:model]).new
         params[:attributes].each do |e,i|
