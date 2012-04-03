@@ -29,12 +29,17 @@ class CsvImportController < ::ApplicationController
 
     def import
       reader = CSV.read(session[:csv_file], :encoding => "UTF-8") 
+      @invalid_recs = Array.new
       reader.each do |row|
         model = eval(params[:model]).new
         params[:attributes].each do |e,i|
           model[e.to_sym] = row[i.to_i] unless i == "None"
         end
-        model.save!
+        if model.valid?
+          model.save
+        else
+          @invalid_recs << model
+        end
       end
       flash[:notice] = "Successful import."
       File.delete(session[:csv_file])
