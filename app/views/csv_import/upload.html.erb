@@ -1,15 +1,3 @@
-<% if @invalid_recs.length > 0 %>
-	<div class="error">
-		<% @invalid_recs.each do |record| %>
-		<h4><%= record.inspect %></h4>
-		<ul>
-			<% record.errors.each do |attrib, msg| %>
-			<li><%= attrib %> - <%= msg %></li>
-			<% end %>
-		</ul>
-		<% end %>
-	</div>
-<% end %>
 <%= form_for :csv,{:html => {:multipart => true} } do |f| %>
 	<label><%= params[:resource].capitalize %></label>
 	<%= file_field_tag 'file' %><br />

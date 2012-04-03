@@ -41,10 +41,12 @@ class CsvImportController < ::ApplicationController
           @invalid_recs << model
         end
       end
-      flash[:notice] = "Successful import."
       File.delete(session[:csv_file])
       session[:csv_file] = nil
-      redirect_to eval (params[:resource] + '_csv_import_upload_path')
+      if @invalid_recs.empty?
+        flash[:notice] = "Successful import."
+        redirect_to eval (params[:resource] + '_csv_import_upload_path')
+      end
     end
     
     private

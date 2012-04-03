@@ -1,0 +1,11 @@
+<h3>Import completed with Errors</h3>
+<div class="error">
+	<% @invalid_recs.each do |record| %>
+	<p><%= record.inspect %></p>
+	<ul>
+		<% record.errors.each do |attrib, msg| %>
+		<li><%= attrib %> - <%= msg %></li>
+		<% end %>
+	</ul>
+	<% end %>
+</div>
