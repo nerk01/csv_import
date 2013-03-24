@@ -1,9 +1,10 @@
 class CsvImportController < ::ApplicationController
-  before_filter :authenticate
+  before_filter :authenticate_cardcollector!
   before_filter :access_check
   
     def upload
       if request.post?
+        authorize! :manage, params[:model].constantize
         uploaded = params[:file]
         target = Rails.root.join('tmp', uploaded.original_filename)
         logger.info uploaded.class.to_s
@@ -17,6 +18,7 @@ class CsvImportController < ::ApplicationController
     end
     
     def map
+      authorize! :manage, params[:model].constantize
       require 'csv'
       reader = CSV.read(session[:csv_file], :encoding => "UTF-8") 
       @heading = reader.shift  
@@ -28,6 +30,7 @@ class CsvImportController < ::ApplicationController
     end
 
     def import
+      authorize! :manage, params[:model].constantize
       reader = CSV.read(session[:csv_file], :encoding => "UTF-8") 
       @invalid_recs = Array.new
       reader.each do |row|
@@ -49,10 +52,4 @@ class CsvImportController < ::ApplicationController
       end
     end
     
-    private
-
-      def access_check
-        redirect_to :root unless current_user.is_admin?("Data")
-      end
-      
 end
