@@ -1,6 +1,5 @@
 class CsvImportController < ::ApplicationController
   before_filter :authenticate_cardcollector!
-  before_filter :access_check
   
     def upload
       if request.post?
